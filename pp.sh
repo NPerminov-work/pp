@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## - messages for an employer
+## - comments for dear employer
 # - actual code comments
 
 ## Let's make it clear for you, i can run native commands
