@@ -1,29 +1,35 @@
 #!/bin/bash
 
-#Let's make it clear for ya, i can run native commands
+## - messages for an employer
+# - actual code comments
+
+## Let's make it clear for you, i can run native commands
 clear
 
-# I also can set variables, counters, arrays, etc
+## I also can set variables, use them as counters, etc
 address="8.8.8.8"
 connected=1
 sec=0
 break_count=0
 break_number=0
+
+## I know that arrays exist too
 break_times[0]=$(date +%R:%S)
 
-# I can do functions, look
+## I can do functions, too!
 there_was_a_break () {
 	((break_number++));
 	break_times+=( $(date +%R:%S) );
 }
 
-# If you want to test connectivity on something other than 8.8.8.8, i can work with arguments too
+## i can work with arguments, add some interactivity
+# If you want to test connectivity on something other than 8.8.8.8, write it as an argument
 if [ "$1" != "" ]; then
 	address=$1;
 fi
 
-# And different cycles, too!
-# While, if, for, netsted cycles, you call it
+## And different types of cycles, too
+## While, if, for, netsted cycles, you call it
 while (( connected == 1 )) ; do
 	if
 		ping -q -c 1 -W 1 $address &>/dev/null; then
@@ -50,7 +56,7 @@ while (( connected == 1 )) ; do
 		echo -e "$(tput cuu 1; tput el; tput bold; tput setaf 1)Disconnected!";
 		sleep 1;
 		
-		# This count is to make sure that you're really not connected and it's not just a stray packet
+		# This counter is to make sure that you're really not connected and it's not just a stray packet
 		((break_count++))
 		
 		# If disconnect is momentary, don't break the cycle and keep pinging
@@ -63,7 +69,8 @@ while (( connected == 1 )) ; do
 	
 done
 
-# Some formatting, pretty colors, bald text, replacing the line, etc
+## Some formatting, pretty colors, bald text, replacing the line, etc
+## Making it easier and friendlier for other users
 tput setaf 2; tput cuu 1; tput el; tput bold;
 
 # Show what you've been pinging and for how long
@@ -81,4 +88,6 @@ done
 # Gotta be pretty :3
 tput cuu 1; tput el;
 
-
+## It was a fun little exercise for me, and gotta say i pulled up the docs numerous times while writing it
+## I've prepped this piece specifically for the moment of interview someone asks me to write something if i'll be too tensed up
+## And since we're here, dear HR, ask me anything about it
