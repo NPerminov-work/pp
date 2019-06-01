@@ -6,7 +6,7 @@
 ## Let's make it clear for you, i can run native commands
 clear
 
-## I also can set variables, use them as counters, etc
+## I also can set variables, use them as counters or boolean values, etc
 address="8.8.8.8"
 connected=1
 sec=0
