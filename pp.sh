@@ -88,7 +88,6 @@ done
 # Gotta be pretty :3
 tput cuu 1; tput el;
 
-## It was a fun little exercise for me, and gotta say i pulled up the docs numerous times while writing it
-## I've prepped this piece specifically for the moment of interview someone asks me to write something if i'll be too tensed up
+## I've prepped this piece specifically for the moment of interview someone asks me to write something, if i'll be too tensed up
 ## And if we are on interview right now, looking at it, then please, ask me anything about this code rather than asking to write
 ## (i'm just a nervous junior, hope you understand, it'll go away with experience)
