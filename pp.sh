@@ -23,9 +23,24 @@ there_was_a_break () {
 }
 
 ## i can work with arguments, add some interactivity
-# If you want to test connectivity on something other than 8.8.8.8, write it as an argument
 if [ "$1" != "" ]; then
-	address=$1;
+	case $1 in
+		-h | --help )
+			echo -e "Usage: ./pp.sh [address], -t [address], -h\n\nDefault target is 8.8.8.8"
+			exit 0
+			;;
+		-t | --target )
+			if [ "$2" != "" ]; then
+				address=$2;
+			else
+				echo -e "Asking for --target, you gotta put something there, i need an argument";
+				exit 0;
+			fi
+			;;
+		* )
+		address=$1;
+			;;
+	esac
 fi
 
 ## And different types of cycles, too
@@ -55,6 +70,7 @@ while (( connected == 1 )) ; do
 	else
 		echo -e "$(tput cuu 1; tput el; tput bold; tput setaf 1)Disconnected!";
 		sleep 1;
+		((sec++));
 		
 		# This counter is to make sure that you're really not connected and it's not just a stray packet
 		((break_count++))
