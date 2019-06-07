@@ -22,6 +22,30 @@ there_was_a_break () {
 	break_times+=( $(date +%R:%S) );
 }
 
+show_info () {
+## Some formatting, pretty colors, bald text, replacing the line, etc
+## Making it easier and friendlier for other users
+tput setaf 2; tput cuu 1; tput el; tput bold;
+
+# Show what you've been pinging and for how long
+echo -e "You was successfully pinging $address for $sec seconds since ${break_times[0]}"
+
+# Show how many breaks there were
+echo -e "\n\nThere were $(tput setaf 1) $break_number $(tput setaf 2) breaks in total"
+
+# Show the time of each break
+for index in "${!break_times[@]}"; do
+	echo -e "$(($index+1)) break was at ${break_times[ $(( $index+1 )) ]}";
+done
+
+# Move one line up and delete it becasue we did "index+1" instead of "index" so last array element is empty
+# Gotta be pretty :3
+tput cuu 1; tput el;
+}
+
+# Show total info about the script running after preemptively closing it
+trap "show_info && exit 0" SIGINT;
+
 ## i can work with arguments, add some interactivity
 if [ "$1" != "" ]; then
 	case $1 in
@@ -84,25 +108,6 @@ while (( connected == 1 )) ; do
 	fi
 	
 done
-
-## Some formatting, pretty colors, bald text, replacing the line, etc
-## Making it easier and friendlier for other users
-tput setaf 2; tput cuu 1; tput el; tput bold;
-
-# Show what you've been pinging and for how long
-echo -e "You was successfully pinging $address for $sec seconds since ${break_times[0]}"
-
-# Show how many breaks there were
-echo -e "\n\nThere were $(tput setaf 1) $break_number $(tput setaf 2) breaks in total"
-
-# Show the time of each break
-for index in "${!break_times[@]}"; do
-	echo -e "$(($index+1)) break was at ${break_times[ $(( $index+1 )) ]}";
-done
-
-# Move one line up and delete it becasue we did "index+1" instead of "index" so last array element is empty
-# Gotta be pretty :3
-tput cuu 1; tput el;
 
 ## I've prepped this piece specifically for the moment of interview someone asks me to write something, if i'll be too tensed up
 ## And if we are on interview right now, looking at it, then please, ask me anything about this code rather than asking to write
