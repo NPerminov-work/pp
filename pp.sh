@@ -109,6 +109,8 @@ while (( connected == 1 )) ; do
 	
 done
 
+show_info;
+
 ## I've prepped this piece specifically for the moment of interview someone asks me to write something, if i'll be too tensed up
 ## And if we are on interview right now, looking at it, then please, ask me anything about this code rather than asking to write
 ## (i'm just a nervous junior, hope you understand, it'll go away with experience)
