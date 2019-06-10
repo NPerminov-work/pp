@@ -76,7 +76,7 @@ trap "show_info && exit 0" SIGINT;
 ## While, if, for, netsted cycles, you call it
 while (( connected == 1 )) ; do
 	if
-		ping -q -c 1 -W 1 $address &>/dev/null; then
+		ping -q -c 1 -W 0 $address &>/dev/null; then
 		echo -e "$(tput cuu 1; tput el; tput bold; tput setaf 2)Connected for $sec seconds!";
 		
 		# If there were any breaks, show how many while it's still going
@@ -85,7 +85,6 @@ while (( connected == 1 )) ; do
 			tput cuu 3;
 		fi
 	
-		sleep 1;
 		((sec++));
 
 		# If there was a break, reset the counter so it doesn't add to the previous one
@@ -105,12 +104,12 @@ while (( connected == 1 )) ; do
 		
 		# If disconnect is momentary, don't break the cycle and keep pinging
 		# Otherwise, increment the counter because this is the last cycle
-		if (( permanent == 0 )) && (( break_count > 5 )); then
+		if (( permanent == 0 )) && (( break_count > 4 )); then
 			connected=0;
 			there_was_a_break;
 		fi
 	fi
-	
+sleep 1;
 done
 
 show_info;
